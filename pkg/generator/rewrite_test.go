@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/bigwhite/functrace/pkg/generator"
+	"github.com/Asphaltt/functrace/pkg/generator"
 )
 
 var update = flag.Bool("update", false, "update .golden files")
@@ -38,7 +38,7 @@ func TestRewrite(t *testing.T) {
 			t.Fatalf("rewrite failed: %v\n", err)
 		}
 		if *update {
-			ioutil.WriteFile(golden, got, 0644)
+			ioutil.WriteFile(golden, got, 0o644)
 		}
 
 		want, err := ioutil.ReadFile(golden)

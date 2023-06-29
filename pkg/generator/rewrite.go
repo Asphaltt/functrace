@@ -32,15 +32,15 @@ func Rewrite(filename string) ([]byte, error) {
 	if err != nil {
 		return nil, fmt.Errorf("error parsing %s: %w", filename, err)
 	}
-	//fmt.Printf("%#v\n", *oldAST)
+	// fmt.Printf("%#v\n", *oldAST)
 
 	if !hasFuncDecl(oldAST) {
 		return nil, nil
 	}
 
 	// add import declaration
-	astutil.AddImport(fset, oldAST, "github.com/bigwhite/functrace")
-	//fmt.Printf("added=%#v\n", added)
+	astutil.AddImport(fset, oldAST, "github.com/Asphaltt/functrace")
+	// fmt.Printf("added=%#v\n", added)
 
 	// inject code into each function declaration
 	addDeferTraceIntoFuncDecls(oldAST)

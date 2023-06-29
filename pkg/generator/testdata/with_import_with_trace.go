@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/bigwhite/functrace"
+	"github.com/Asphaltt/functrace"
 )
 
 func A1() {

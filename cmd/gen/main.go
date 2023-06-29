@@ -7,12 +7,10 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/bigwhite/functrace/pkg/generator"
+	"github.com/Asphaltt/functrace/pkg/generator"
 )
 
-var (
-	wrote bool
-)
+var wrote bool
 
 func init() {
 	flag.BoolVar(&wrote, "w", false, "write result to (source) file instead of stdout")
@@ -63,7 +61,7 @@ func main() {
 	}
 
 	// write to the source file
-	if err = ioutil.WriteFile(file, newSrc, 0666); err != nil {
+	if err = ioutil.WriteFile(file, newSrc, 0o666); err != nil {
 		fmt.Printf("write %s error: %v\n", file, err)
 		return
 	}

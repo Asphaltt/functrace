@@ -1,3 +1,4 @@
+//go:build trace
 // +build trace
 
 package functrace
@@ -9,6 +10,7 @@ import (
 	"runtime"
 	"strconv"
 	"sync"
+	"time"
 )
 
 func init() {
@@ -16,8 +18,10 @@ func init() {
 	log.Default().SetOutput(os.Stdout)
 }
 
-var mu sync.Mutex
-var m = make(map[uint64]int)
+var (
+	mu sync.Mutex
+	m  = make(map[uint64]int)
+)
 
 func getGID() uint64 {
 	b := make([]byte, 64)
@@ -28,12 +32,21 @@ func getGID() uint64 {
 	return n
 }
 
-func printTrace(id uint64, name, typ string, indent int) {
+func printTraceEntry(id uint64, name, typ string, indent int) {
 	indents := ""
 	for i := 0; i < indent; i++ {
 		indents += "\t"
 	}
+
 	log.Printf("g[%02d]:%s%s%s\n", id, indents, typ, name)
+}
+
+func printTraceExit(id uint64, name, typ string, indent int, started time.Time) {
+	indents := ""
+	for i := 0; i < indent; i++ {
+		indents += "\t"
+	}
+	log.Printf("g[%02d]:%s%s%s\t\tcost: %s\n", id, indents, typ, name, time.Since(started))
 }
 
 func Trace() func() {
@@ -45,17 +58,18 @@ func Trace() func() {
 	id := getGID()
 	fn := runtime.FuncForPC(pc)
 	name := fn.Name()
+	started := time.Now()
 
 	mu.Lock()
 	v := m[id]
 	m[id] = v + 1
 	mu.Unlock()
-	printTrace(id, name, "->", v+1)
+	printTraceEntry(id, name, "->", v+1)
 	return func() {
 		mu.Lock()
 		v := m[id]
 		m[id] = v - 1
 		mu.Unlock()
-		printTrace(id, name, "<-", v)
+		printTraceExit(id, name, "<-", v, started)
 	}
 }

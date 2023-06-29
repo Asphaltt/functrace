@@ -1,7 +1,7 @@
-module github.com/bigwhite/functrace-demo
+module github.com/Asphaltt/functrace-demo
 
 go 1.14
 
-replace github.com/bigwhite/functrace => ../../
+replace github.com/Asphaltt/functrace => ../../
 
-require github.com/bigwhite/functrace v0.0.0-00010101000000-000000000000
+require github.com/Asphaltt/functrace v0.0.0-00010101000000-000000000000

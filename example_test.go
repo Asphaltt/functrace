@@ -2,7 +2,7 @@
 package functrace_test
 
 import (
-	"github.com/bigwhite/functrace"
+	"github.com/Asphaltt/functrace"
 )
 
 func a() {
@@ -27,12 +27,12 @@ func d() {
 func ExampleTrace() {
 	a()
 	// Output:
-	// g[01]:	->github.com/bigwhite/functrace_test.a
-	// g[01]:		->github.com/bigwhite/functrace_test.b
-	// g[01]:			->github.com/bigwhite/functrace_test.c
-	// g[01]:				->github.com/bigwhite/functrace_test.d
-	// g[01]:				<-github.com/bigwhite/functrace_test.d
-	// g[01]:			<-github.com/bigwhite/functrace_test.c
-	// g[01]:		<-github.com/bigwhite/functrace_test.b
-	// g[01]:	<-github.com/bigwhite/functrace_test.a
+	// g[01]:	->github.com/Asphaltt/functrace_test.a
+	// g[01]:		->github.com/Asphaltt/functrace_test.b
+	// g[01]:			->github.com/Asphaltt/functrace_test.c
+	// g[01]:				->github.com/Asphaltt/functrace_test.d
+	// g[01]:				<-github.com/Asphaltt/functrace_test.d
+	// g[01]:			<-github.com/Asphaltt/functrace_test.c
+	// g[01]:		<-github.com/Asphaltt/functrace_test.b
+	// g[01]:	<-github.com/Asphaltt/functrace_test.a
 }

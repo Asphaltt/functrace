@@ -3,10 +3,10 @@
 all: build
 
 build:
-	go build github.com/bigwhite/functrace/cmd/gen
+	go build github.com/Asphaltt/functrace/cmd/gen
 
-install: 
-	go install github.com/bigwhite/functrace/cmd/gen
+install:
+	go install github.com/Asphaltt/functrace/cmd/gen@latest
 
 clean:
 	go clean
